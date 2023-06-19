@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@600&family=Londrina+Solid:wght@100;300;400;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            /* background-position: fixed; */
+        }
+
+        .container {
+            background-image: url(./images/背景.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            height: 100vh;
+            margin: auto;
+            /* background: lightblue; */
+            position: relative;
+        }
+
+        #timer {
+            display: inline-block;
+            font-size: 36px;
+            background: #a1b872;
+            color: beige;
+            padding: 1rem 2rem;
+            /* letter-spacing: 0.5rem; */
+            border-radius: 10px;
+            position: absolute;
+            left: 200px;
+            top: 100px;
+            font-family: 'Edu NSW ACT Foundation', cursive;
+        }
+
+        #clock {
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            background: radial-gradient(transparent, rgba(255, 255, 255, 0.2)), url(./images/刻度.png);
+            border-radius: 50%;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            border: 1px solid #a1b872;
+            box-shadow: 0px 0px 15px #333333;
+            backdrop-filter: blur(5px);
+            /* animation: animate 5s ease-in-out infinite; */
+        }
+
+        @keyframes animate {
+
+            0%,
+            100% {
+                transform: translateY(10px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #hour {
+            width: 20%;
+            height: 10px;
+            /* background-color: #e5d67b; */
+            position: absolute;
+            top: calc(50% - 15px);
+            left: 30%;
+            /* border-radius: 5px; */
+            transform-origin: 80px 15px;
+        }
+
+        #minute {
+            width: 30%;
+            height: 5px;
+            background-color: #e8caa4;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 20%;
+            border-radius: 5px;
+            transform-origin: right center;
+        }
+
+        #second {
+            width: 35%;
+            height: 1px;
+            background-color: #bed3d4;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 15%;
+            border-radius: 5px;
+            transform-origin: right center;
+        }
+
+        #dot {
+            width: 20px;
+            height: 20px;
+            background-color: #a1b872;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 10px);
+            left: calc(50% - 10px);
+        }
+
+        #cat {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #cat img {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="timer"></div>
+        <div id="clock">
+            <div id="hour">
+                <img src="./images/fish.png" width="110%">
+            </div>
+            <div id="minute"></div>
+            <div id="second"></div>
+            <div id="dot"></div>
+        </div>
+        <div id="cat"><img src="./images/—Pngtree—black cat silhouette_6144031.png" alt=""></div>
+    </div>
+
+    <script>
+        const hour = document.getElementById('hour')
+        const minute = document.getElementById('minute')
+        const second = document.getElementById('second')
+
+        function showTime() {
+            let date = new Date()
+            let years = date.getFullYear()
+            let months = date.getMonth()
+            let days = date.getDate()
+            const week = new Array(7)
+            week[0] = "Sunday"
+            week[1] = "Monday"
+            week[2] = "Tuesday"
+            week[3] = "Wednesday"
+            week[4] = "Thursday"
+            week[5] = "Friday"
+            week[6] = "Saturday"
+
+            let elem = document.getElementById('timer')
+            elem.innerHTML = `${years}/${months + 1}/${days}  ${week[date.getDay()]}`
+        }
+        showTime();
+        setInterval(showTime);
+
+        setInterval(() => {
+            const date = new Date()
+            hour.style.transform = `rotate(${date.getHours() * 30 + 90}deg)`
+            minute.style.transform = `rotate(${date.getMinutes() * 6 + 90}deg)`
+            second.style.transform = `rotate(${date.getSeconds() * 6 + 90}deg)`
+        }, 1000)
+    </script>
+</body>
+
+</html>
